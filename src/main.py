@@ -6,15 +6,25 @@ from datetime import datetime as dt
 load_dotenv()
 ACCESS_KEY = os.getenv("ACCESS_KEY")
 URL = os.getenv("API_URL")
+BLUE_URL = os.getenv("BLUE_URL")
+HISTORICAL_BLUE = os.getenv("HISTORICAL_BLUE")
 
 
-class app:
+class CurrencyApp:
     def __init__(self):
         self._url = URL
         self._key = ACCESS_KEY
+        self._urlBlue = BLUE_URL
+        self._historyBlue = HISTORICAL_BLUE
 
     def getURL(self):
         return self._url
+    
+    def getURLBlue(self):
+        return self._urlBlue
+    
+    def getURLHistoryBlue(self):
+        return self._historyBlue
     
     def getKey(self):
         return self._key
@@ -92,10 +102,38 @@ class app:
         result = requests.get(self.getURL() + "historical",params=endpoint)
 
         return result.json()
+    
+    def getDolarBlue(self):
+
+        result = requests.get(self.getURLBlue())
+        valor = result.json()
+
+        return valor["blue"]
+    
+    def convertDolarBlueToARS(self,monto_usd : float):
+
+        sell_price = self.getDolarBlue()["value_sell"]
+
+        return sell_price * monto_usd
+    
+    def convertARSToDolarBlue(self, monto_ars : float):
+
+        buy_price = self.getDolarBlue()["value_buy"]
+
+        return monto_ars / buy_price
+
+    def getBlueHistory(self, fecha : dt):
+        endpoint = {
+            "day": fecha.strftime("%Y-%m-%d")
+        }
+        result = requests.get(self.getURLHistoryBlue(),params=endpoint)
+
+        return result.json()
+    
 
 
 if __name__ == "__main__":
-    aplicacion = app()
+    aplicacion = CurrencyApp()
 
     ### PRUEBAS DE REQUESTS ###
         
@@ -126,3 +164,14 @@ if __name__ == "__main__":
      #   print(f"Codigo para la moneda ingresada: {codigo_moneda}")
     #else:
      #   print("El codigo o la moneda ingresada no existe")
+
+    #blue = aplicacion.getDolarBlue()
+    #for k,v in blue.items():
+     #   print(f"{k} = ${v} ARS")
+
+    #print(aplicacion.convertARSToDolarBlue(10000))
+    #print(aplicacion.convertDolarBlueToARS(100))
+
+    #historico = aplicacion.getBlueHistory(dt(2022,7,11))
+    #for k,v in historico["blue"].items():
+     #   print(f"{k} = ${v} ARS")
