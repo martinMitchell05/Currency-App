@@ -106,9 +106,8 @@ class CurrencyApp:
     def getDolarBlue(self):
 
         result = requests.get(self.getURLBlue())
-        valor = result.json()
 
-        return valor["blue"]
+        return result.json()["blue"]
     
     def convertDolarBlueToARS(self,monto_usd : float):
 
@@ -130,6 +129,20 @@ class CurrencyApp:
 
         return result.json()
     
+    def getEuroBlue(self):
+        result = requests.get(self.getURLBlue())
+
+        return result.json()["blue_euro"]
+    
+    def convertEuroBlueToARS(self, monto_eur : float):
+        sell_price = self.getEuroBlue()["value_sell"]
+
+        return sell_price * monto_eur
+    
+    def convertARSToEuroBlue(self, monto_ars : float):
+        buy_price = self.getEuroBlue()["value_buy"]
+
+        return monto_ars / buy_price
 
 
 if __name__ == "__main__":
@@ -175,3 +188,11 @@ if __name__ == "__main__":
     #historico = aplicacion.getBlueHistory(dt(2022,7,11))
     #for k,v in historico["blue"].items():
      #   print(f"{k} = ${v} ARS")
+
+    #euro = aplicacion.getEuroBlue()
+    #for k,v in euro.items():
+    #    print(f"{k} = ${v} ARS")
+
+    #print(aplicacion.convertARSToEuroBlue(20000))
+    #print(f"\n{aplicacion.convertEuroBlueToARS(100)}")
+
