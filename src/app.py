@@ -165,32 +165,32 @@ class CurrencyApp:
 
         return result
 
-if __name__ == "__main__":
-    aplicacion = CurrencyApp()
+#if __name__ == "__main__":
+    #aplicacion = CurrencyApp()
 
     ### PRUEBAS DE REQUESTS ###
     
     #historico = aplicacion.convert_history("ARS","USD",10000,dt(2023,7,11))
     #print(f"Monto en USD = ${historico["result"]} a la fecha de {historico["date"]}")
 
-    listado_historico = aplicacion.getCurrenciesHistory("USD",["ARS","EUR","CAD"],dt(2022,7,11))
-    for k,v in listado_historico["quotes"].items():
-        base = k[:3]
-        destino = k[3:]
-        print(f"1 {base} = {v:.2f} {destino} a la fecha de {listado_historico["date"]}")
+    #listado_historico = aplicacion.getCurrenciesHistory("USD",["ARS","EUR","CAD"],dt(2022,7,11))
+    #for k,v in listado_historico["quotes"].items():
+    #    base = k[:3]
+    #    destino = k[3:]
+    #    print(f"1 {base} = {v:.2f} {destino} a la fecha de {listado_historico["date"]}")
 
-    resultados = aplicacion.convert("EUR","ARS",3679.88)
-    print(f"{resultados["result"]:.2f} ARS")
+    #resultados = aplicacion.convert("EUR","ARS",3679.88)
+    #print(f"{resultados["result"]:.2f} ARS")
 
     #codigos = aplicacion.getCurrenciesCod()
     #for k,v in codigos["currencies"].items():
     #    print(f"{k} = {v}")
 
-    listado = aplicacion.getCurrencies("CAD",["ARS","USD"])
-    for k,v in listado["quotes"].items():
-        base = k[:3] #extrae los primeros 3 caracteres de la key. (forma la moneda base)
-        destino = k[3:] #extrae los ultimos caracteres desde el tercero, de la key del dict en 'quotes'. (forma la moneda destino)
-        print(f"1 {base} = {v:.2f} {destino}")
+    #listado = aplicacion.getCurrencies("CAD",["ARS","USD"])
+    #for k,v in listado["quotes"].items():
+    #    base = k[:3] #extrae los primeros 3 caracteres de la key. (forma la moneda base)
+    #    destino = k[3:] #extrae los ultimos caracteres desde el tercero, de la key del dict en 'quotes'. (forma la moneda destino)
+    #    print(f"1 {base} = {v:.2f} {destino}")
 
     #codigo_moneda = aplicacion.searchCod("British ")
     #if (codigo_moneda != ""):
@@ -198,20 +198,20 @@ if __name__ == "__main__":
     #else:
     #   print("El codigo o la moneda ingresada no existe")
 
-    blue = aplicacion.getDolarBlue()
-    for k,v in blue.items():
-       print(f"{k} = ${v} ARS")
+    #blue = aplicacion.getDolarBlue()
+    #for k,v in blue.items():
+    #   print(f"{k} = ${v} ARS")
 
-    print(aplicacion.convertARSToDolarBlue(10000))
-    print(aplicacion.convertDolarBlueToARS(100))
+    #print(aplicacion.convertARSToDolarBlue(10000))
+    #print(aplicacion.convertDolarBlueToARS(100))
 
-    historico = aplicacion.getBlueHistory(dt(2022,7,11))
-    for k,v in historico["blue"].items():
-       print(f"{k} = ${v} ARS")
+    #historico = aplicacion.getBlueHistory(dt(2022,7,11))
+    #for k,v in historico["blue"].items():
+    #   print(f"{k} = ${v} ARS")
 
-    euro = aplicacion.getEuroBlue()
-    for k,v in euro.items():
-       print(f"{k} = ${v} ARS")
+    #euro = aplicacion.getEuroBlue()
+    #for k,v in euro.items():
+    #   print(f"{k} = ${v} ARS")
 
-    print(aplicacion.convertARSToEuroBlue(20000))
-    print(f"\n{aplicacion.convertEuroBlueToARS(100)}")
+    #print(aplicacion.convertARSToEuroBlue(20000))
+    #print(f"\n{aplicacion.convertEuroBlueToARS(100)}")

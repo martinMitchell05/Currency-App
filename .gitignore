@@ -1,3 +1,4 @@
 app_venv/
-*.pdf
 .env
+__pycache__
+.vscode
